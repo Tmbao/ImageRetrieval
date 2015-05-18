@@ -1,2 +1,2 @@
 # ImageRetrieval
-Image Retrieval Cpp
+Image Retrieval using C++
