@@ -59,7 +59,7 @@ struct InvertedIndex {
             double idf = log(double(nDocs) / index[i].size());
             double tf = sqrt(qFrequency[i] / qSumFrequency);
 
-            qTfidf[i] = tf * idf;
+            qTfidf[i] = tf * idf / sqrt(index[i].size());
         }
 
         return qTfidf;
