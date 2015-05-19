@@ -4,16 +4,13 @@ project(ImageRetrievalCpp)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -std=c++11")
 
 set(SOURCE_FILES
-    app/app_data.h
+    app/appdata.h
     query/query.h
-    utils/inverted_index.h
+    utils/invertedindex.h
+    extract/extract.h
+    quantize/quantize.h
     configurations.h
     main.cpp
     README.md)
-
-include_directories(.)
-include_directories(app)
-include_directories(query)
-include_directories(utils)
 
 add_executable(ImageRetrievalCpp ${SOURCE_FILES})

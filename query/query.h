@@ -1,16 +1,16 @@
-#ifndef IMAGE_RETRIEVAL_QUERY_H
-#define IMAGE_RETRIEVAL_QUERY_H
+#ifndef QUERY_H_INCLUDED
+#define QUERY_H_INCLUDED
 
 
 #include "../configurations.h"
-#include "../app/app_data.h"
+#include "../app/appdata.h"
 
 
-vector<double> compute_all_distances(vector<double> q_tfidf) {
-    app_data *app = app_data::get_instance();
+vector<double> computeAllDistances(vector<double> q_tfidf) {
+    AppData *app = AppData::getInstance();
 
-    vector<double> distances(app->ivt.n_docs);
-    for (int i = 0; i < app->ivt.n_words; i++) 
+    vector<double> distances(app->ivt.nDocs);
+    for (int i = 0; i < app->ivt.nWords; i++)
         for (int j = 0; j < app->ivt.index[i].size(); j++)
             distances[app->ivt.index[i][j]] += q_tfidf[i] * app->ivt.tfidf[i][j];
     
@@ -18,4 +18,4 @@ vector<double> compute_all_distances(vector<double> q_tfidf) {
 }
 
 
-#endif IMAGE_RETRIEVAL_QUERY_H
+#endif QUERY_H_INCLUDED

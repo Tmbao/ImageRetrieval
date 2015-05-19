@@ -1,5 +1,5 @@
-#ifndef IMAGE_RETRIEVAL_CONFIGURATION_H
-#define IMAGE_RETRIEVAL_CONFIGURATION_H
+#ifndef CONFIGURATION_H_INCLUDED
+#define CONFIGURATION_H_INCLUDED
 
 
 #include <bits/stdc++.h>
@@ -15,4 +15,4 @@ using namespace arma;
 const int number_of_visual_words = 1000000;
 
 
-#endif IMAGE_RETRIEVAL_CONFIGURATION_H
+#endif CONFIGURATION_H_INCLUDED
