@@ -1,26 +1,52 @@
+#ifndef IMAGE_RETRIEVAL_INVERTED_INDEX_H
+#define IMAGE_RETRIEVAL_INVERTED_INDEX_H
+
+
 #include "../configurations.h"
 
-typedef vector<int> VI;
-typedef vector<VI> VII;
+
+struct inverted_index {
+
+    int n_words, n_docs;
+
+    vector<vector<int>> index;
+    vector<vector<double>> frequency;
+    vector<double> sum_frequency;
+    vector<vector<double>> tfidf;
 
 
-VII build_inverted_index(sp_mat &dat) {
-    int n_words = dat.n_rows;
 
-    uvec id = find(dat);
+    inverted_index() {}
+    inverted_index(int n): index(n), frequency(n), tfidf(n), n_words(n), n_docs(0) {}
 
-    // Initialize inverted index size
-    VI freq(n_words, 0);
-    for (int i = 0; i < id.n_elem; i++)
-        freq[id[i][0] % n_words]++;
+    void build_tfidf() {
+        for (int i = 0; i < n_words; i++) 
+            tfidf[i].resize(index[i].size());
 
-    // Build inverted index
-    VII ivt(n_words);
-    for (int i = 0; i < n_words; i++)
-        ivt[i].reserve(freq[i]);
+        sum_frequency.resize(n_docs, 0);
+        for (int i = 0; i < n_words; i++)
+            for (int j = 0; j < index[i].size(); j++)
+                sum_frequency[index[i][j]] += frequency[i][j];
 
-    for (int i = 0; i < id.n_elem; i++)
-        ivt[id[i][0] % n_words].push_back(id[i][0] / n_words);
+        for (int i = 0; i < n_words; i++) {
+            double idf = log(double(n_docs) / index[i].size());
 
-    return ivt;
-}
+            for (int j = 0; j < index[i].size(); j++) {
+                double tf = frequency[i][j] / sum_frequency[index[i][j]];
+
+                tfidf[i][j] = tf * idf;
+            }
+        }
+    }
+
+    void add(vec freq, uvec term_id, int doc_id) {
+        n_docs++;
+        for (int i = 0; i < term_id.n_elem; i++) {
+            index[term_id[i]].push_back(doc_id);
+            frequency[term_id[i]].push_back(freq[i]);
+        }
+    }
+};
+
+
+#endif IMAGE_RETRIEVAL_INVERTED_INDEX_H
