@@ -9,10 +9,10 @@ struct InvertedIndex {
 
     int nWords, nDocs;
 
-    vector<vector<int>> index;
-    vector<vector<double>> frequency;
+    vector<vector<int> > index;
+    vector<vector<double> > frequency;
     vector<double> sumFrequency;
-    vector<vector<double>> tfidf;
+    vector<vector<double> > tfidf;
 
     bool isBuild;
 
@@ -34,7 +34,7 @@ struct InvertedIndex {
             for (int j = 0; j < index[i].size(); j++) {
                 double tf = sqrt(frequency[i][j] / sumFrequency[index[i][j]]);
 
-                tfidf[i][j] = tf * idf / sqrt(index[i].size());
+                tfidf[i][j] = tf * idf;
             }
         }
 
@@ -66,14 +66,20 @@ struct InvertedIndex {
     }
 
     void add(vec freq, uvec termId, int docId) {
+        vector <int> raw_freq(nWords);
         nDocs++;
         for (int i = 0; i < termId.n_elem; i++) {
             if (index[termId[i]].empty() || index[termId[i]].back() != docId) {
                 index[termId[i]].push_back(docId);
                 frequency[termId[i]].push_back(0);
             }
+            raw_freq[termId[i]]++;
             frequency[termId[i]].back() += freq[i];
         }
+
+        for (int i = 0; i < nWords; ++i)
+            if (index[i].back() == docId)
+                frequency[i].back() /= sqrt(raw_freq[i]);
 
         isBuild = false;
     }
