@@ -86,4 +86,4 @@ struct InvertedIndex {
 };
 
 
-#endif INVERTEDINDEX_H_INCLUDED
+#endif

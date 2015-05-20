@@ -1,17 +1,8 @@
-#ifndef FUNCTION_H_INCLUDED
-#define FUNCTION_H_INCLUDED
+#ifndef EXTRACT_H_INCLUDED
+#define EXTRACT_H_INCLUDED
 
-#include <string>
-#include "dirent.h"
-#include <armadillo>
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
+#include "../configurations.h"
 
-using namespace std;
-using namespace arma;
-
-const string featureConfig = "-hesaff -sift -noangle";
-const string computeDescriptorPath = "compute_descriptors.exe";
 
 mat inv2x2(mat C) {
     mat den = C.row(0) % C.row(2) - C.row(1) % C.row(1);

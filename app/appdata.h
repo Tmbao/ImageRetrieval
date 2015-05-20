@@ -33,4 +33,4 @@ public:
 AppData* AppData::_instance = NULL;
 
 
-#endif APPDATA_H_INCLUDED
+#endif
