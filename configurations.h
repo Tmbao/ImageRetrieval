@@ -17,13 +17,16 @@ using namespace arma;
 
 
 const int number_of_visual_words = 1000000;
-const double eps = 1e-9;
+const double EPS = 1e-9;
 
 const string featureConfig = "-hesaff -sift -noangle";
-const string computeDescriptorPath = "compute_descriptors.exe";
+const string computeDescriptorPath = "./feature_detector/compute_descriptors_64bit.ln";
 
-const string codebookFile = "oxbuilding_codebook_l2_1000000_24464227_128_50it_new.hdf5";
-const string indexFile = "flannIndex.hdf5";
+const string codebookFile = "data/oxbuilding_codebook_l2_1000000_24464227_128_50it_new.hdf5";
+const string indexFile = "data/flannIndex.hdf5";
 
+const string dataFolder = "data/images";
+const string queryFolder = "data/queries";
+const string rankedListFolder = "data/rankedlists";
 
 #endif

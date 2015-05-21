@@ -55,7 +55,6 @@ void extractFeatures(string imagePath, mat &kpMat, mat &siftMat) {
     if (!vl_ubcread(tempFile, clip_kp, clip_desc)) {
         clip_kp = mat(5, 0);
         clip_desc = umat(128, 0);
-    //                cout << "k" << endl;
     }
 
     mat sift = conv_to<mat>::from(clip_desc);

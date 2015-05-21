@@ -11,7 +11,7 @@ const int dataKnn = 1;
 const int queryKnn = 3;
 
 cvflann::Matrix<double> dataset;
-cvflann::Index<cvflann::L2<double> > *treeIndex;
+cvflann::Index<cvflann::L2<double>> *treeIndex;
 
 
 bool exist(string filename) {
@@ -39,8 +39,6 @@ void buildIndex() {
         indexParams = new cvflann::KDTreeIndexParams(nKdTree);
 
     treeIndex = new cvflann::Index<cvflann::L2<double> > (dataset, *indexParams);
-
-
 }
 
 void buildBoW(const mat &imageDesc, mat &weights, umat &termID) {
@@ -59,7 +57,7 @@ void buildBoW(const mat &imageDesc, mat &weights, umat &termID) {
     memcpy(sqrDists.memptr(), dists.data, query.rows * queryKnn * sizeof(double));
 
     termID = vectorise(bins, 0);
-            
+
     weights = exp(-sqrDists / (2 * deltaSqr));
     weights = weights / repmat(sum(weights, 0), weights.n_rows, 1);
     vectorise(weights, 0);

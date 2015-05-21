@@ -10,6 +10,10 @@ class AppData {
 public:
 
     InvertedIndex ivt;
+    vector<string> path;
+    vector<mat> kp, sift;
+    vector<mat> weights;
+    vector<umat> termID;
 
 private:
 

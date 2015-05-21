@@ -11,7 +11,7 @@ vector<double> computeAllDistances(vector<double> qTfidf) {
 
     vector<double> distances(app->ivt.nDocs);
     for (int i = 0; i < app->ivt.nWords; i++) {
-        if (abs(qTfidf[i]) < eps)
+        if (abs(qTfidf[i]) < EPS)
             continue;
         for (int j = 0; j < app->ivt.index[i].size(); j++)
             distances[app->ivt.index[i][j]] += qTfidf[i] * app->ivt.tfidf[i][j];
@@ -19,6 +19,5 @@ vector<double> computeAllDistances(vector<double> qTfidf) {
     
     return distances;
 }
-
 
 #endif
