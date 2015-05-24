@@ -9,6 +9,9 @@
 
 AppData *app;
 
+#define debugInfo(x) cerr << x << endl
+#define debugVar(x) cerr << #x << " = " << x << endl
+
 void extractAll() {
 
 //    Get list of image files
@@ -20,11 +23,16 @@ void extractAll() {
         app->path.push_back(fName);
     }
 
+    debugInfo("Extracting features");
+
 //    Extract features
     app->path.shrink_to_fit();
     app->kp.reserve(app->path.size());
     app->sift.reserve(app->path.size());
     for (string imgPath : app->path) {
+
+        debugVar(imgPath);
+
         imgPath = dataFolder + "/" + imgPath;
         mat _kp, _sift;
         extractFeatures(imgPath, _kp, _sift);
@@ -35,6 +43,9 @@ void extractAll() {
 }
 
 void quantizeAllData() {
+
+    debugInfo("Quantizing images");
+
     buildIndex();
 
     app->weights.reserve(app->path.size());
@@ -42,6 +53,9 @@ void quantizeAllData() {
 
     int nDocs = app->path.size();
     for (int i = 0; i < nDocs; i++) {
+
+        debugVar(i);
+
         mat _weights;
         umat _termID;
         buildBoW(app->sift[i], _weights, _termID);
@@ -71,10 +85,15 @@ void processAllQueries() {
         queryPath.push_back(fName);
     }
 
+    debugInfo("Extracting queries' features");
+
 //    Extract features
     queryKp.reserve(queryPath.size());
     querySift.reserve(queryPath.size());
     for (string imgPath : queryPath) {
+
+        debugVar(imgPath);
+
         mat _kp, _sift;
         extractFeatures(imgPath, _kp, _sift);
 
@@ -82,10 +101,15 @@ void processAllQueries() {
         querySift.push_back(_sift);
     }
 
+    debugInfo("Computing queries' ranked list");
+
 //    Builf TFIDF and compute ranked list
     int nQueries = queryPath.size();
     int nDocs = app->path.size();
     for (int i = 0; i < nQueries; i++) {
+
+        debugVar(i);
+
         mat _weights;
         umat _termID;
 

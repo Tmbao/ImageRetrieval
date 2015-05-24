@@ -29,4 +29,12 @@ const string dataFolder = "data/images";
 const string queryFolder = "data/queries";
 const string rankedListFolder = "data/rankedlists";
 
+// Geometric verification parameters
+#define TOLERANCE_1 80
+#define TOLERANCE_2 30
+#define TOLERANCE_3 40
+#define MIN_INLIERS 6
+#define N_ITERATIONS 3
+#define sqr(x) (x) * (x)
+
 #endif
