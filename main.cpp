@@ -39,6 +39,8 @@ void extractAll() {
         kpPath = kpFolder + "/" + tmp;
         siftPath = siftFolder + "/" + tmp;
         imgPath = dataFolder + "/" + imgPath;
+        debugVar(kpPath);
+        debugVar(siftPath);
         mat _kp, _sift;
         extractFeatures(imgPath, _kp, _sift, kpPath, siftPath);
 
