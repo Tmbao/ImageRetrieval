@@ -107,8 +107,15 @@ void processAllQueries() {
 
         debugVar(imgPath);
 
+        string tmp = imgPath;
+        tmp.replace(tmp.size() - 3, 3, "mat");
+
+        kpPath = kpFolder + "/" + tmp;
+        siftPath = siftFolder + "/" + tmp;
+        imgPath = queryFolder + "/" + imgPath;
+
         mat _kp, _sift;
-        extractFeatures(imgPath, _kp, _sift);
+        extractFeatures(imgPath, _kp, _sift, kpPath, siftPath);
 
         queryKp.push_back(_kp);
         querySift.push_back(_sift);
@@ -126,7 +133,13 @@ void processAllQueries() {
         mat _weights;
         umat _termID;
 
-        buildBoW(querySift[i], _weights, _termID);
+        string tmp = queryPath[i];
+        tmp.replace(tmp.size() - 3, 3, "mat");
+
+        string weightPath = weightFolder + "/" + tmp;
+        string termIDPath = termIDFolder + "/" + tmp;
+
+        buildBoW(querySift[i], _weights, _termID, weightPath, termIDPath);
 
         vector<double> qTfidf = app->ivt.makeQueryTfidf(_weights, _termID);
 
