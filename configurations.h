@@ -21,7 +21,7 @@ const int number_of_visual_words = 1000000;
 const double EPS = 1e-9;
 
 const string featureConfig = "-hesaff -sift -noangle";
-const string computeDescriptorPath = "./feature_detector/compute_descriptors_64bit.ln";
+const string computeDescriptorPath = "./utils/feature_detector/compute_descriptors_64bit.ln";
 
 const string codebookFile = "data/oxbuilding_codebook_l2_1000000_24464227_128_50it.hdf5";
 const string indexFile = "data/flannIndex.hdf5";
@@ -33,7 +33,6 @@ const string kpFolder = "data/Kp";
 const string siftFolder = "data/SIFT";
 const string weightFolder = "data/weight";
 const string termIDFolder = "data/termID";
-
 // Geometric verification parameters
 #define TOLERANCE_1 80
 #define TOLERANCE_2 30

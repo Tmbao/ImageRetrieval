@@ -25,6 +25,8 @@ opencv2/flann/flann.hpp
 -
 opencv2/flann/hdf5.h
 -
+boost/filesystem.hpp
+-
 dirent.h
 -
 
