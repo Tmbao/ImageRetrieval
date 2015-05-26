@@ -36,8 +36,8 @@ void extractAll() {
         string tmp = imgPath;
         tmp.replace(tmp.size() - 3, 3, "mat");
 
-        kpPath = kpFolder + "/" + tmp;
-        siftPath = siftFolder + "/" + tmp;
+        string kpPath = kpFolder + "/" + tmp;
+        string siftPath = siftFolder + "/" + tmp;
         imgPath = dataFolder + "/" + imgPath;
         debugVar(kpPath);
         debugVar(siftPath);
@@ -110,8 +110,8 @@ void processAllQueries() {
         string tmp = imgPath;
         tmp.replace(tmp.size() - 3, 3, "mat");
 
-        kpPath = kpFolder + "/" + tmp;
-        siftPath = siftFolder + "/" + tmp;
+        string kpPath = kpFolder + "/" + tmp;
+        string siftPath = siftFolder + "/" + tmp;
         imgPath = queryFolder + "/" + imgPath;
 
         mat _kp, _sift;
