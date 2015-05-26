@@ -12,6 +12,7 @@ using namespace arma;
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/flann/flann.hpp>
 #include <opencv2/flann/hdf5.h>
+#include <boost/filesystem.hpp>
 
 #include <dirent.h>
 
@@ -28,6 +29,10 @@ const string indexFile = "data/flannIndex.hdf5";
 const string dataFolder = "data/images";
 const string queryFolder = "data/queries";
 const string rankedListFolder = "data/rankedlists";
+const string kpFolder = "data/Kp";
+const string siftFolder = "data/SIFT";
+const string weightFolder = "data/weight";
+const string termIDFolder = "data/termID";
 
 // Geometric verification parameters
 #define TOLERANCE_1 80

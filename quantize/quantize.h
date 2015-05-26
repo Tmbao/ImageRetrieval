@@ -41,7 +41,13 @@ void buildIndex() {
     treeIndex = new cvflann::Index<cvflann::L2<double> > (dataset, *indexParams);
 }
 
-void buildBoW(const mat &imageDesc, mat &weights, umat &termID) {
+void buildBoW(const mat &imageDesc, mat &weights, umat &termID, const string &weightPath, const string &termIDPath) {
+    if (boost::filesystem::exists(weightPath)) {
+        weights.load(weightPath);
+        termID.load(termIDPath);
+        return;
+    }
+
     double *tmpData = new double[imageDesc.n_elem];
     memcpy(tmpData, imageDesc.memptr(), sizeof(double) * imageDesc.n_elem);
     cvflann::Matrix<double> query(tmpData, imageDesc.n_cols, imageDesc.n_rows);
@@ -61,6 +67,9 @@ void buildBoW(const mat &imageDesc, mat &weights, umat &termID) {
     weights = exp(-sqrDists / (2 * deltaSqr));
     weights = weights / repmat(sum(weights, 0), weights.n_rows, 1);
     vectorise(weights, 0);
+
+    weights.save(weightPath);
+    termID.save(termIDPath);
 }
 
 #endif

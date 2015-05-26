@@ -33,9 +33,14 @@ void extractAll() {
 
         debugVar(imgPath);
 
+        string tmp = imgPath;
+        tmp.replace(tmp.size() - 3, 3, "mat");
+
+        kpPath = kpFolder + "/" + tmp;
+        siftPath = siftFolder + "/" + tmp;
         imgPath = dataFolder + "/" + imgPath;
         mat _kp, _sift;
-        extractFeatures(imgPath, _kp, _sift);
+        extractFeatures(imgPath, _kp, _sift, kpPath, siftPath);
 
         app->kp.push_back(_kp);
         app->sift.push_back(_sift);
@@ -56,9 +61,15 @@ void quantizeAllData() {
 
         debugVar(i);
 
+        string tmp = app->path[i];
+        tmp.replace(tmp.size() - 3, 3, "mat");
+
+        string weightPath = weightFolder + "/" + tmp;
+        string termIDPath = termIDFolder + "/" + tmp;
+
         mat _weights;
         umat _termID;
-        buildBoW(app->sift[i], _weights, _termID);
+        buildBoW(app->sift[i], _weights, _termID, weightPath, termIDPath);
 
 //        Insert to inverted index
         app->ivt.add(_weights, _termID, i);

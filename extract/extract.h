@@ -41,7 +41,13 @@ void convertJPGtoPNG(string filename) {
     cv::imwrite(filename.replace(filename.size() - 3, 3, "png"), im);
 }
 
-void extractFeatures(string imagePath, mat &kpMat, mat &siftMat) {
+void extractFeatures(string imagePath, mat &kpMat, mat &siftMat, const string &kpPath, const string &siftPath) {
+    if (boost::filesystem::exists(siftPath)) {
+        kpMat.load(kpPath);
+        siftMat.load(siftPath);
+        return;
+    }
+
     string tempFile = "./temp.mat";
 
     string cmd = computeDescriptorPath + " " + featureConfig + " -i "
@@ -63,6 +69,8 @@ void extractFeatures(string imagePath, mat &kpMat, mat &siftMat) {
 
     kpMat = clip_kp;
     siftMat = sqrt_desc;
+    kpMat.save(kpPath);
+    siftMat.save(siftPath);
 }
 
 #endif
