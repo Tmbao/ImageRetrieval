@@ -132,8 +132,8 @@ void processAllQueries() {
 
         debugVar(i);
 
-        mat _weights;
-        umat _termID;
+        vec _weights;
+        uvec _termID;
 
         string tmp = queryPath[i];
         tmp.replace(tmp.size() - 3, 3, "mat");
