@@ -54,7 +54,7 @@ void buildBoW(const mat &imageDesc, vec &_weights, uvec &_termID, const string &
 
     _termID = vectorise(bins, 0);
 
-    weights = exp(-sqrDists / (2 * deltaSqr));
+    mat weights = exp(-sqrDists / (2 * deltaSqr));
     weights = weights / repmat(sum(weights, 0), weights.n_rows, 1);
     _weights = vectorise(weights, 0);
 
