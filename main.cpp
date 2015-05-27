@@ -61,15 +61,15 @@ void quantizeAllData() {
     int nDocs = app->path.size();
     for (int i = 0; i < nDocs; i++) {
 
-        debugVar(i);
-        debugVar(weightPath);
-        debugVar(termIDPath);
-
         string tmp = app->path[i];
         tmp.replace(tmp.size() - 3, 3, "mat");
 
         string weightPath = weightFolder + "/" + tmp;
         string termIDPath = termIDFolder + "/" + tmp;
+
+        debugVar(i);
+        debugVar(weightPath);
+        debugVar(termIDPath);
 
         mat _weights;
         umat _termID;
