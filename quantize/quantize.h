@@ -14,7 +14,7 @@ cvflann::Matrix<double> dataset;
 cvflann::Index<cvflann::L2<double>> *treeIndex;
 
 void buildIndex() {
-    cvflann::Matrix<double> dataset;
+    cout << "Start Building index\n";
 
     cvflann::load_from_file(dataset, codebookFile, "clusters");
 
@@ -27,6 +27,7 @@ void buildIndex() {
 
     treeIndex = new cvflann::Index<cvflann::L2<double> > (dataset, *indexParams);
     treeIndex->buildIndex();
+    cout << "Builded index successfully\n";
 }
 
 void buildBoW(const mat &imageDesc, mat &weights, umat &termID, const string &weightPath, const string &termIDPath) {
@@ -43,7 +44,9 @@ void buildBoW(const mat &imageDesc, mat &weights, umat &termID, const string &we
     cvflann::Matrix<int> indices(new int[query.rows*queryKnn], query.rows, queryKnn);
     cvflann::Matrix<double> dists(new double[query.rows*queryKnn], query.rows, queryKnn);
 
+    cout << "Start knnSearch\n";
     treeIndex->knnSearch(query, indices, dists, queryKnn, cvflann::SearchParams(nChecks));
+    cout << "Finished knnSearch\n";
 
     umat bins(queryKnn, query.rows);
     memcpy(bins.memptr(), indices.data, query.rows * queryKnn * sizeof(int));
