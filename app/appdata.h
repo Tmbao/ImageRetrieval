@@ -12,8 +12,8 @@ public:
     InvertedIndex ivt;
     vector<string> path;
     vector<mat> kp, sift;
-    vector<mat> weights;
-    vector<umat> termID;
+    vector<vec> weights;
+    vector<uvec> termID;
 
 private:
 
