@@ -14,8 +14,6 @@ cvflann::Matrix<double> dataset;
 cvflann::Index<cvflann::L2<double>> *treeIndex;
 
 void buildIndex() {
-    cout << "Start Building index\n";
-
     cvflann::load_from_file(dataset, codebookFile, "clusters");
 
     cvflann::IndexParams *indexParams;
@@ -25,6 +23,7 @@ void buildIndex() {
     else
         indexParams = new cvflann::KDTreeIndexParams(nKdTree);
 
+    cout << "Start building index\n";
     treeIndex = new cvflann::Index<cvflann::L2<double> > (dataset, *indexParams);
     treeIndex->buildIndex();
     cout << "Builded index successfully\n";
