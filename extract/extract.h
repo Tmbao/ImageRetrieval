@@ -45,6 +45,8 @@ void extractFeatures(string imagePath, mat &kpMat, mat &siftMat, const string &k
     if (boost::filesystem::exists(siftPath)) {
         kpMat.load(kpPath);
         siftMat.load(siftPath);
+        cout << kpMat.n_rows <<" "<<kpMat.n_cols << endl;
+        cout << siftMat.n_rows <<" "<<siftMat.n_cols << endl;
         return;
     }
 

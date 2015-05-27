@@ -25,6 +25,8 @@ void buildIndex() {
     else
         indexParams = new cvflann::KDTreeIndexParams(nKdTree);
 
+
+    cout << dataset.rows <<" "<<dataset.cols << endl;
     treeIndex = new cvflann::Index<cvflann::L2<double> > (dataset, *indexParams);
 }
 
