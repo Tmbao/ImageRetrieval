@@ -13,19 +13,6 @@ const int queryKnn = 3;
 cvflann::Matrix<double> dataset;
 cvflann::Index<cvflann::L2<double>> *treeIndex;
 
-
-bool exist(string filename) {
-    ifstream fin(filename.c_str());
-    if (!fin.good()) {
-        fin.close();
-        return 1;
-    }
-    else {
-        fin.close();
-        return 0;
-    }
-}
-
 void buildIndex() {
     cvflann::Matrix<double> dataset;
 
@@ -33,7 +20,7 @@ void buildIndex() {
 
     cvflann::IndexParams *indexParams;
 
-    if (exist(indexFile))
+    if (boost::filesystem::exists(indexFile))
         indexParams = new cvflann::SavedIndexParams(indexFile);
     else
         indexParams = new cvflann::KDTreeIndexParams(nKdTree);
@@ -56,6 +43,7 @@ void buildBoW(const mat &imageDesc, mat &weights, umat &termID, const string &we
     cvflann::Matrix<double> dists(new double[query.rows*queryKnn], query.rows, queryKnn);
 
     treeIndex->knnSearch(query, indices, dists, queryKnn, cvflann::SearchParams(nChecks));
+    cout << "knn search sucessfully\n";
 
     umat bins(queryKnn, query.rows);
     memcpy(bins.memptr(), indices.data, query.rows * queryKnn * sizeof(int));

@@ -62,6 +62,8 @@ void quantizeAllData() {
     for (int i = 0; i < nDocs; i++) {
 
         debugVar(i);
+        debugVar(weightPath);
+        debugVar(termIDPath);
 
         string tmp = app->path[i];
         tmp.replace(tmp.size() - 3, 3, "mat");
