@@ -71,8 +71,8 @@ void quantizeAllData() {
         debugVar(weightPath);
         debugVar(termIDPath);
 
-        mat _weights;
-        umat _termID;
+        vec _weights;
+        uvec _termID;
         buildBoW(app->sift[i], _weights, _termID, weightPath, termIDPath);
 
 //        Insert to inverted index
