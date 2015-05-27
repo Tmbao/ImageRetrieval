@@ -89,6 +89,8 @@ ImageRetrievalCpp: /usr/local/lib/libopencv_contrib.so.2.4.10
 ImageRetrievalCpp: /usr/lib64/libhdf5.so
 ImageRetrievalCpp: /usr/lib64/libz.so
 ImageRetrievalCpp: /usr/lib64/libm.so
+ImageRetrievalCpp: /root/nmduc/caffe-lib/boost_1_55_0/stage/lib/libboost_filesystem.so
+ImageRetrievalCpp: /root/nmduc/caffe-lib/boost_1_55_0/stage/lib/libboost_system.so
 ImageRetrievalCpp: /usr/local/lib/libopencv_nonfree.so.2.4.10
 ImageRetrievalCpp: /usr/local/lib/libopencv_ocl.so.2.4.10
 ImageRetrievalCpp: /usr/local/lib/libopencv_gpu.so.2.4.10
