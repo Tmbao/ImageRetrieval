@@ -29,10 +29,10 @@ void buildIndex() {
     cout << "Builded index successfully\n";
 }
 
-void buildBoW(const mat &imageDesc, mat &weights, umat &termID, const string &weightPath, const string &termIDPath) {
+void buildBoW(const mat &imageDesc, vec &_weights, uvec &_termID, const string &weightPath, const string &termIDPath) {
     if (boost::filesystem::exists(weightPath)) {
-        weights.load(weightPath);
-        termID.load(termIDPath);
+        _weights.load(weightPath);
+        _termID.load(termIDPath);
         return;
     }
 
@@ -52,14 +52,14 @@ void buildBoW(const mat &imageDesc, mat &weights, umat &termID, const string &we
     mat sqrDists(queryKnn, query.rows);
     memcpy(sqrDists.memptr(), dists.data, query.rows * queryKnn * sizeof(double));
 
-    termID = vectorise(bins, 0);
+    _termID = vectorise(bins, 0);
 
     weights = exp(-sqrDists / (2 * deltaSqr));
     weights = weights / repmat(sum(weights, 0), weights.n_rows, 1);
-    vectorise(weights, 0);
+    _weights = vectorise(weights, 0);
 
-    weights.save(weightPath);
-    termID.save(termIDPath);
+    _weights.save(weightPath);
+    _termID.save(termIDPath);
 }
 
 #endif
