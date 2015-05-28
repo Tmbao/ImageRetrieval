@@ -33,12 +33,19 @@ const string kpFolder = "data/Kp";
 const string siftFolder = "data/SIFT";
 const string weightFolder = "data/weight";
 const string termIDFolder = "data/termID";
+
+
 // Geometric verification parameters
 #define TOLERANCE_1 80
 #define TOLERANCE_2 30
 #define TOLERANCE_3 40
 #define MIN_INLIERS 6
 #define N_ITERATIONS 3
+
+// Some macros
 #define sqr(x) (x) * (x)
+#define debugInfo(x) cerr << x << endl
+#define debugVar(x) cerr << #x << " = " << x << endl
+
 
 #endif

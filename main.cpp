@@ -7,10 +7,8 @@
 #include "utils/distance.h"
 #include "utils/utils.h"
 
-AppData *app;
 
-#define debugInfo(x) cerr << x << endl
-#define debugVar(x) cerr << #x << " = " << x << endl
+AppData *app;
 
 void extractAll() {
 
@@ -142,17 +140,23 @@ void processAllQueries() {
         string weightPath = weightFolder + "/" + tmp;
         string termIDPath = termIDFolder + "/" + tmp;
 
-        buildBoW(querySift[i], _weights, _termID, weightPath, termIDPath);
-
+        debugInfo("Building query BOW");
+	buildBoW(querySift[i], _weights, _termID, weightPath, termIDPath);
+	
+	debugInfo("Building query tfidf");
         vector<double> qTfidf = app->ivt.makeQueryTfidf(_weights, _termID);
 
+	debugInfo("Computing distances");
         Distance distance(computeAllDistances(qTfidf));
 
+	debugInfo("Intializing ranked list");
         vector<int> rankedList(nDocs);
         for (int i = 0; i < nDocs; i++)
             rankedList[i] = i;
+	debugInfo("Sorting ranked list");
         sort(rankedList.begin(), rankedList.end(), distance);
 
+	debugInfo("Outputing ranked list");
         string rankedListPath = rankedListFolder + "/" + getFileBaseName(queryPath[i]) + ".txt";
         FILE *rankedListFile = fopen(rankedListPath.c_str(), "w");
         for (int i = 0; i < nDocs; i++)

@@ -20,14 +20,21 @@ struct InvertedIndex {
     InvertedIndex(int n): index(n), frequency(n), tfidf(n), nWords(n), nDocs(0), isBuild(false) {}
 
     void buildTfidf() {
+
+	debugInfo("Building TFIDF based on inverted index");
+
+
+	debugInfo("Allocating tfidf");
         for (int i = 0; i < nWords; i++) 
             tfidf[i].resize(index[i].size());
 
+	debugInfo("Computing sumFrequency");
         sumFrequency.resize(nDocs, 0);
         for (int i = 0; i < nWords; i++)
             for (int j = 0; j < index[i].size(); j++)
                 sumFrequency[index[i][j]] += frequency[i][j];
 
+	debugInfo("Computing tfidf");
         for (int i = 0; i < nWords; i++) {
             double idf = log(double(nDocs) / index[i].size());
 
@@ -39,6 +46,8 @@ struct InvertedIndex {
         }
 
         isBuild = true;
+
+	debugInfo("Finish");
     }
 
     vector<double> makeQueryTfidf(vec freq, uvec termId) {
@@ -68,6 +77,9 @@ struct InvertedIndex {
     void add(vec freq, uvec termId, int docId) {
         nDocs++;
 
+	debugInfo("Adding document to inverted index");
+	debugVar(docId);
+
         vector <int> rawFreq(nWords);
         for (int i = 0; i < termId.n_elem; i++) {
             if (index[termId[i]].empty() || index[termId[i]].back() != docId) {
@@ -83,6 +95,8 @@ struct InvertedIndex {
                 frequency[i].back() /= sqrt(rawFreq[i]);
 
         isBuild = false;
+
+	debugInfo("Finish");
     }
 };
 
