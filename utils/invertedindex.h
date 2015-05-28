@@ -76,9 +76,10 @@ struct InvertedIndex {
             }
             rawFreq[termId[i]]++;
             frequency[termId[i]].back() += freq[i];
-        }
+	}
+
         for (int i = 0; i < nWords; ++i)
-            if (index[i].back() == docId)
+            if (!index[i].empty() && index[i].back() == docId)
                 frequency[i].back() /= sqrt(rawFreq[i]);
 
         isBuild = false;
