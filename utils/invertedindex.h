@@ -21,20 +21,20 @@ struct InvertedIndex {
 
     void buildTfidf() {
 
-	debugInfo("Building TFIDF based on inverted index");
+        debugInfo("Building TFIDF based on inverted index");
 
 
-	debugInfo("Allocating tfidf");
+        debugInfo("Allocating tfidf");
         for (int i = 0; i < nWords; i++) 
             tfidf[i].resize(index[i].size());
 
-	debugInfo("Computing sumFrequency");
+        debugInfo("Computing sumFrequency");
         sumFrequency.resize(nDocs, 0);
         for (int i = 0; i < nWords; i++)
             for (int j = 0; j < index[i].size(); j++)
                 sumFrequency[index[i][j]] += frequency[i][j];
 
-	debugInfo("Computing tfidf");
+        debugInfo("Computing tfidf");
         for (int i = 0; i < nWords; i++) {
             double idf = log(double(nDocs) / index[i].size());
 
@@ -47,7 +47,7 @@ struct InvertedIndex {
 
         isBuild = true;
 
-	debugInfo("Finish");
+        debugInfo("Finish");
     }
 
     vector<double> makeQueryTfidf(vec freq, uvec termId) {
@@ -57,11 +57,16 @@ struct InvertedIndex {
 
         vector<double> qTfidf(nWords);
 
+        vector <int> rawFreq(nWords);
         vector<double> qFrequency(nWords, 0);
         double qSumFrequency = 0;
         for (int i = 0; i < termId.n_elem; i++) {
             qFrequency[termId[i]] += freq[i];
-            qSumFrequency += freq[i];
+            rawFreq[termId[i]]++;
+        }
+        for (int i = 0; i < nWords; i++) {
+            qFrequency[i] /= rawFreq[i];
+            qSumFrequency += qFrequency[i];
         }
 
         for (int i = 0; i < nWords; i++) {
@@ -77,8 +82,8 @@ struct InvertedIndex {
     void add(vec freq, uvec termId, int docId) {
         nDocs++;
 
-	debugInfo("Adding document to inverted index");
-	debugVar(docId);
+        debugInfo("Adding document to inverted index");
+        debugVar(docId);
 
         vector <int> rawFreq(nWords);
         for (int i = 0; i < termId.n_elem; i++) {
@@ -88,7 +93,7 @@ struct InvertedIndex {
             }
             rawFreq[termId[i]]++;
             frequency[termId[i]].back() += freq[i];
-	}
+        }
 
         for (int i = 0; i < nWords; ++i)
             if (!index[i].empty() && index[i].back() == docId)
@@ -96,7 +101,7 @@ struct InvertedIndex {
 
         isBuild = false;
 
-	debugInfo("Finish");
+        debugInfo("Finish");
     }
 };
 

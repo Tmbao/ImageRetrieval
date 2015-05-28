@@ -73,7 +73,7 @@ void quantizeAllData() {
         uvec _termID;
 
         buildBoW(app->sift[i], _weights, _termID, weightPath, termIDPath);
-	
+        
 //      Insert to inverted index
         app->ivt.add(_weights, _termID, i);
 
@@ -141,22 +141,22 @@ void processAllQueries() {
         string termIDPath = termIDFolder + "/" + tmp;
 
         debugInfo("Building query BOW");
-	buildBoW(querySift[i], _weights, _termID, weightPath, termIDPath);
-	
-	debugInfo("Building query tfidf");
+        buildBoW(querySift[i], _weights, _termID, weightPath, termIDPath);
+        
+        debugInfo("Building query tfidf");
         vector<double> qTfidf = app->ivt.makeQueryTfidf(_weights, _termID);
 
-	debugInfo("Computing scores");
+        debugInfo("Computing scores");
         Score score(computeAllScores(qTfidf));
 
-	debugInfo("Intializing ranked list");
+        debugInfo("Intializing ranked list");
         vector<int> rankedList(nDocs);
         for (int i = 0; i < nDocs; i++)
             rankedList[i] = i;
-	debugInfo("Sorting ranked list");
+        debugInfo("Sorting ranked list");
         sort(rankedList.begin(), rankedList.end(), score);
 
-	debugInfo("Outputing ranked list");
+        debugInfo("Outputing ranked list");
         string rankedListPath = rankedListFolder + "/" + getFileBaseName(queryPath[i]) + ".txt";
         FILE *rankedListFile = fopen(rankedListPath.c_str(), "w");
         for (int i = 0; i < nDocs; i++)
