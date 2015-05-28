@@ -93,6 +93,7 @@ struct InvertedIndex {
             }
             rawFreq[termId[i]]++;
             frequency[termId[i]].back() += freq[i];
+            cout << freq[i] << endl;
         }
 
         for (int i = 0; i < nWords; ++i)
