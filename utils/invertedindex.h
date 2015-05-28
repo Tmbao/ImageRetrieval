@@ -65,7 +65,7 @@ struct InvertedIndex {
             rawFreq[termId[i]]++;
         }
         for (int i = 0; i < nWords; i++) {
-            qFrequency[i] /= rawFreq[i];
+            qFrequency[i] /= sqrt(rawFreq[i]);
             qSumFrequency += qFrequency[i];
         }
 
