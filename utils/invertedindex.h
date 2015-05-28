@@ -36,7 +36,7 @@ struct InvertedIndex {
 
         debugInfo("Computing tfidf");
         for (int i = 0; i < nWords; i++) {
-            double idf = log(double(nDocs) / index[i].size());
+            double idf = log(double(nDocs) / (index[i].size() + 1));
 
             for (int j = 0; j < index[i].size(); j++) {
                 double tf = sqrt(frequency[i][j] / sumFrequency[index[i][j]]);
@@ -70,7 +70,7 @@ struct InvertedIndex {
         }
 
         for (int i = 0; i < nWords; i++) {
-            double idf = log(double(nDocs) / index[i].size());
+            double idf = log(double(nDocs) / (index[i].size() + 1));
             double tf = sqrt(qFrequency[i] / qSumFrequency);
 
             qTfidf[i] = tf * idf;
