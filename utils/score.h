@@ -12,7 +12,7 @@ public:
     Score(vector<double> _score): score(_score) {}
 
     bool operator() (int i, int j) {
-        return score[i] < score[j];
+        return score[i] > score[j];
     }
 };
 
