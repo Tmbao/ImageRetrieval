@@ -4,6 +4,9 @@
 #include <string>
 #include <vector>
 
+#include <cstdlib>
+#include <cstdio>
+
 using namespace std;
 
 vector<string>
