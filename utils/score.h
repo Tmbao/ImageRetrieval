@@ -4,15 +4,15 @@
 #include "../configurations.h"
 
 
-class Distance {
+class Score {
 private:
-    vector<double> distances;
+    vector<double> score;
 
 public:
-    Distance(vector<double> _distances): distances(_distances) {}
+    Score(vector<double> _score): score(_score) {}
 
     bool operator() (int i, int j) {
-        return distances[i] < distances[j];
+        return score[i] < score[j];
     }
 };
 

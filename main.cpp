@@ -4,7 +4,7 @@
 #include "extract/extract.h"
 #include "quantize/quantize.h"
 #include "query/query.h"
-#include "utils/distance.h"
+#include "utils/score.h"
 #include "utils/utils.h"
 
 
@@ -146,15 +146,15 @@ void processAllQueries() {
 	debugInfo("Building query tfidf");
         vector<double> qTfidf = app->ivt.makeQueryTfidf(_weights, _termID);
 
-	debugInfo("Computing distances");
-        Distance distance(computeAllDistances(qTfidf));
+	debugInfo("Computing scores");
+        Score score(computeAllScores(qTfidf));
 
 	debugInfo("Intializing ranked list");
         vector<int> rankedList(nDocs);
         for (int i = 0; i < nDocs; i++)
             rankedList[i] = i;
 	debugInfo("Sorting ranked list");
-        sort(rankedList.begin(), rankedList.end(), distance);
+        sort(rankedList.begin(), rankedList.end(), score);
 
 	debugInfo("Outputing ranked list");
         string rankedListPath = rankedListFolder + "/" + getFileBaseName(queryPath[i]) + ".txt";
