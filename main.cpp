@@ -159,8 +159,10 @@ void processAllQueries() {
         debugInfo("Outputing ranked list");
         string rankedListPath = rankedListFolder + "/" + getFileBaseName(queryPath[i]) + ".txt";
         FILE *rankedListFile = fopen(rankedListPath.c_str(), "w");
-        for (int i = 0; i < nDocs; i++)
+        for (int i = 0; i < nDocs; i++) {
             fprintf(rankedListFile, "%s\n", getFileBaseName(app->path[rankedList[i]]).c_str());
+	    //cout << score.score[rankedList[i]] << "\n";
+}
         fclose(rankedListFile);
     }
 }

@@ -5,7 +5,7 @@
 
 
 class Score {
-private:
+public:
     vector<double> score;
 
 public:

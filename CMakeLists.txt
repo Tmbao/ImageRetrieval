@@ -14,7 +14,7 @@ set(SOURCE_FILES
     extract/extract.h
     quantize/quantize.h
     utils/utils.h
-    utils/distance.h
+    utils/score.h
     configurations.h
     main.cpp
     README.md)
