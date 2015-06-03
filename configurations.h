@@ -33,6 +33,7 @@ const string kpFolder = "data/Kp";
 const string siftFolder = "data/SIFT";
 const string weightFolder = "data/weight";
 const string termIDFolder = "data/termID";
+const string apFolder = "data/ap";
 
 
 // Geometric verification parameters
