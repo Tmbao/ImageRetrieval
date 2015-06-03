@@ -12,7 +12,7 @@ int main() {
     while (dirent *pdir = readdir(dir)) {
         string fName = pdir->d_name;
 
-        if (fName == '..')
+        if (fName == "..")
             continue;
 
         ifstream fin(fName.c_str());
