@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
-#include "configurations.h"
+
+const string apFolder = "data/ap";
 
 using namespace std;
 
