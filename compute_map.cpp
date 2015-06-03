@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
-
-const string apFolder = "data/ap";
+#include "dirent.h"
 
 using namespace std;
+
+const string apFolder = "data/ap";
 
 int main() {
 	DIR *dir = opendir(apFolder.c_str());
@@ -10,7 +11,7 @@ int main() {
 	int cnt = 0;
     while (dirent *pdir = readdir(dir)) {
         string fName = pdir->d_name;
-        ifstream fin(fName);
+        ifstream fin(fName.c_str());
         double ap;
 
         fin >> ap;
