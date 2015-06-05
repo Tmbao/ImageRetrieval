@@ -15,7 +15,6 @@
 #include "affine.h"
 #include "siftdesc.h"
 
-using namespace cv;
 using namespace std;
 
 struct HessianAffineParams
@@ -49,11 +48,11 @@ struct Keypoint
 
 struct AffineHessianDetector : public HessianDetector, AffineShape, HessianKeypointCallback, AffineShapeCallback
 {
-   const Mat image;
+   const cv::Mat image;
    SIFTDescriptor sift;
    vector<Keypoint> keys;
 public:
-   AffineHessianDetector(const Mat &image, const PyramidParams &par, const AffineShapeParams &ap, const SIFTDescriptorParams &sp) : 
+   AffineHessianDetector(const cv::Mat &image, const PyramidParams &par, const AffineShapeParams &ap, const SIFTDescriptorParams &sp) : 
       HessianDetector(par), 
       AffineShape(ap), 
       image(image),
@@ -63,20 +62,20 @@ public:
          this->setAffineShapeCallback(this);
       }
    
-   void onHessianKeypointDetected(const Mat &blur, float x, float y, float s, float pixelDistance, int type, float response)
+   void onHessianKeypointDetected(const cv::Mat &blur, float x, float y, float s, float pixelDistance, int type, float response)
       {
          g_numberOfPoints++;
          findAffineShape(blur, x, y, s, pixelDistance, type, response);
       }
    
    void onAffineShapeFound(
-      const Mat &blur, float x, float y, float s, float pixelDistance,
+      const cv::Mat &blur, float x, float y, float s, float pixelDistance,
       float a11, float a12,
       float a21, float a22, 
       int type, float response, int iters) 
       {
          // convert shape into a up is up frame
-         rectifyAffineTransformationUpIsUp(a11, a12, a21, a22);
+         rectifyAffineTransforcv::MationUpIsUp(a11, a12, a21, a22);
          
          // now sample the patch
          if (!normalizeAffine(image, x, y, s, a11, a12, a21, a22))
@@ -113,14 +112,14 @@ public:
             Keypoint &k = keys[i];
          
             float sc = AffineShape::par.mrSize * k.s;
-            Mat A = (Mat_<float>(2,2) << k.a11, k.a12, k.a21, k.a22);
+            cv::Mat A = (cv::Mat_<float>(2,2) << k.a11, k.a12, k.a21, k.a22);
             SVD svd(A, SVD::FULL_UV);
             
             float *d = (float *)svd.w.data;
             d[0] = 1.0f/(d[0]*d[0]*sc*sc);
             d[1] = 1.0f/(d[1]*d[1]*sc*sc);
             
-            A = svd.u * Mat::diag(svd.w) * svd.u.t();
+            A = svd.u * cv::Mat::diag(svd.w) * svd.u.t();
            
             out << k.x << " " << k.y << " " << A.at<float>(0,0) << " " << A.at<float>(0,1) << " " << A.at<float>(1,1);
             for (size_t i=0; i<128; i++)
@@ -133,8 +132,8 @@ public:
 void hessaffExtract(const string &filename, const string &tempPath)
 {
    
-   Mat tmp = imread(filename.c_str());
-   Mat image(tmp.rows, tmp.cols, CV_32FC1, Scalar(0));
+   cv::Mat tmp = imread(filename.c_str());
+   cv::Mat image(tmp.rows, tmp.cols, CV_32FC1, Scalar(0));
 
    float *out = image.ptr<float>(0);
    unsigned char *in  = tmp.ptr<unsigned char>(0); 
