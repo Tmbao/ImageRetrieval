@@ -3,7 +3,6 @@
 
 #include "../configurations.h"
 
-
 mat inv2x2(mat C) {
     mat den = C.row(0) % C.row(2) - C.row(1) % C.row(1);
     mat S = join_vert(join_vert(C.row(2), - C.row(1)), C.row(0)) / repmat(den.row(0), 3, 1);
@@ -41,7 +40,7 @@ void convertJPGtoPNG(string filename) {
     cv::imwrite(filename.replace(filename.size() - 3, 3, "png"), im);
 }
 
-void extractFeatures(string imagePath, mat &kpMat, mat &siftMat, const string &kpPath, const string &siftPath) {
+void extractFeatures(string imagePath, mat &kpMat, mat &siftMat, const string &kpPath, const string &siftPath, const string &tempPath) {
     if (boost::filesystem::exists(siftPath)) {
         kpMat.load(kpPath);
         siftMat.load(siftPath);
@@ -50,17 +49,12 @@ void extractFeatures(string imagePath, mat &kpMat, mat &siftMat, const string &k
         return;
     }
 
-    string tempFile = "./temp.mat";
-
-    string cmd = computeDescriptorPath + " " + featureConfig + " -i "
-        + imagePath + " -o1 " + tempFile;
-
-    system(cmd.c_str());
+    hessaffExtract(imagePath, tempPath);
 
     mat clip_kp;
     umat clip_desc;
 
-    if (!vl_ubcread(tempFile, clip_kp, clip_desc)) {
+    if (!vl_ubcread(tempPath, clip_kp, clip_desc)) {
         clip_kp = mat(5, 0);
         clip_desc = umat(128, 0);
     }

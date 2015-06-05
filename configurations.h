@@ -16,6 +16,8 @@ using namespace arma;
 
 #include <dirent.h>
 
+#include "/utils/hesaff"
+
 
 const int number_of_visual_words = 1000000;
 const double EPS = 1e-9;
@@ -34,6 +36,7 @@ const string siftFolder = "data/SIFT";
 const string weightFolder = "data/weight";
 const string termIDFolder = "data/termID";
 const string apFolder = "data/ap";
+const string tempFolder = "data/temp";
 
 
 // Geometric verification parameters

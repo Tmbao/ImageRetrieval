@@ -113,10 +113,11 @@ void processAllQueries() {
 
         string kpPath = kpFolder + "/" + tmp;
         string siftPath = siftFolder + "/" + tmp;
+        string tempPath = tempFolder + "/" + tmp;
         imgPath = queryFolder + "/" + imgPath;
 
         mat _kp, _sift;
-        extractFeatures(imgPath, _kp, _sift, kpPath, siftPath);
+        extractFeatures(imgPath, _kp, _sift, kpPath, siftPath, tempPath);
 
         queryKp.push_back(_kp);
         querySift.push_back(_sift);
