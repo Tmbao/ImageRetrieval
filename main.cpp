@@ -36,7 +36,9 @@ void extractAll() {
 
         string kpPath = kpFolder + "/" + tmp;
         string siftPath = siftFolder + "/" + tmp;
+        string tempPath = tempFolder + "/" + tmp;
         imgPath = dataFolder + "/" + imgPath;
+
         debugVar(kpPath);
         debugVar(siftPath);
         mat _kp, _sift;
