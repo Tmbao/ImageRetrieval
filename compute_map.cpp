@@ -3,7 +3,7 @@
 
 using namespace std;
 
-const string apFolder = "data/ap";
+const string apFolder = "data/ap/";
 
 int main() {
     DIR *dir = opendir(apFolder.c_str());
@@ -12,19 +12,23 @@ int main() {
     while (dirent *pdir = readdir(dir)) {
         string fName = pdir->d_name;
 
-        if (fName == "..")
+        if (fName == ".." || fName == ".")
             continue;
+	
+	fName = apFolder + fName;
+
+	cout << fName << " ";
 
         ifstream fin(fName.c_str());
         double ap;
 
         fin >> ap;
         fin.close();
-        cout << ap;
+        cout << ap << endl;
 
         ++cnt;
         mAP += ap;
     }
 
-    cout << "mAP:" << mAP / cnt << endl;
+    cout << cnt << "files"  << " mAP:" << mAP / cnt << endl;
 }
