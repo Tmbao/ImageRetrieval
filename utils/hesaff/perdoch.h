@@ -75,7 +75,7 @@ public:
       int type, float response, int iters) 
       {
          // convert shape into a up is up frame
-         rectifyAffineTransforcv::MationUpIsUp(a11, a12, a21, a22);
+         rectifyAffineTransformationUpIsUp(a11, a12, a21, a22);
          
          // now sample the patch
          if (!normalizeAffine(image, x, y, s, a11, a12, a21, a22))
