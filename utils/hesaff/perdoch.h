@@ -14,7 +14,6 @@
 #include "helpers.h"
 #include "affine.h"
 #include "siftdesc.h"
-#include "../../configurations.h"
 
 using namespace cv;
 using namespace std;
