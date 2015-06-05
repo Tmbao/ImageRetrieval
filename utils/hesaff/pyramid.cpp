@@ -15,7 +15,7 @@
 
 #include <iostream>
 using namespace std;
-/* find blob point type from Hessian matrix H, 
+/* find blob point type from Hessian cv::Matrix H, 
    we know that:
    - if H is positive definite it is a DARK blob,
    - if H is negative definite it is a BRIGHT blob
@@ -36,7 +36,7 @@ int getHessianPointType(float *ptr, float value)
    }      
 }
 
-bool isMax(float val, const Mat &pix, int row, int col)
+bool isMax(float val, const cv::Mat &pix, int row, int col)
 {   
    for (int r = row - 1; r <= row + 1; r++)
    {
@@ -48,7 +48,7 @@ bool isMax(float val, const Mat &pix, int row, int col)
    return true;
 }
    
-bool isMin(float val, const Mat &pix, int row, int col)
+bool isMin(float val, const cv::Mat &pix, int row, int col)
 {
    for (int r = row - 1; r <= row + 1; r++)
    {
@@ -60,14 +60,14 @@ bool isMin(float val, const Mat &pix, int row, int col)
    return true;
 }
 
-Mat HessianDetector::hessianResponse(const Mat &inputImage, float norm)
+cv::Mat HessianDetector::hessianResponse(const cv::Mat &inputImage, float norm)
 {
    const int rows = inputImage.rows;
    const int cols = inputImage.cols;
    const int stride = cols;
 
    // allocate output
-   Mat outputImage(rows, cols, CV_32FC1);
+   cv::Mat outputImage(rows, cols, CV_32FC1);
    
    // setup input and output pointer to be centered at 1,0 and 1,1 resp.
    const float *in = inputImage.ptr<float>(1);
@@ -167,7 +167,7 @@ void HessianDetector::localizeKeypoint(int r, int c, float curScale, float pixel
       if (isnan(b[0]) || isnan(b[1]) || isnan(b[2]))
          return;
          
-      // aproximate peak value
+      // aproxicv::Mate peak value
       val = cur.at<float>(r,c) + 0.5f * (dx*b[0] + dy*b[1] + ds*b[2]);
                
       // if we are off by more than MAX_SUBPIXEL_SHIFT, update the position and iterate again      
@@ -221,9 +221,9 @@ void HessianDetector::findLevelKeypoints(float curScale, float pixelDistance)
    }
 }
 
-void HessianDetector::detectOctaveKeypoints(const Mat &firstLevel, float pixelDistance, Mat &nextOctaveFirstLevel)
+void HessianDetector::detectOctaveKeypoints(const cv::Mat &firstLevel, float pixelDistance, cv::Mat &nextOctaveFirstLevel)
 {
-   octaveMap = Mat::zeros(firstLevel.rows, firstLevel.cols, CV_8UC1);
+   octaveMap = cv::Mat::zeros(firstLevel.rows, firstLevel.cols, CV_8UC1);
    float sigmaStep = pow(2.0f, 1.0f / (float) par.numberOfScales);
    float curSigma = par.initialSigma;
    blur = firstLevel;   
@@ -235,7 +235,7 @@ void HessianDetector::detectOctaveKeypoints(const Mat &firstLevel, float pixelDi
       // compute the increase necessary for the next level and compute the next level
       float sigma = curSigma * sqrt(sigmaStep * sigmaStep - 1.0f);
       // do the blurring
-      Mat nextBlur = gaussianBlur(blur, sigma);
+      cv::Mat nextBlur = gaussianBlur(blur, sigma);
       // the next level sigma
       sigma = curSigma*sigmaStep;
       // compute response for current level
@@ -258,11 +258,11 @@ void HessianDetector::detectOctaveKeypoints(const Mat &firstLevel, float pixelDi
    }
 }
    
-void HessianDetector::detectPyramidKeypoints(const Mat &image)
+void HessianDetector::detectPyramidKeypoints(const cv::Mat &image)
 {
    float curSigma = 0.5f;
    float pixelDistance = 1.0f;
-   Mat   firstLevel;
+   cv::Mat   firstLevel;
    
    if (par.upscaleInputImage > 0)
    {
@@ -283,7 +283,7 @@ void HessianDetector::detectPyramidKeypoints(const Mat &image)
    int minSize = 2 * par.border + 2;
    while (firstLevel.rows > minSize && firstLevel.cols > minSize)
    {
-      Mat nextOctaveFirstLevel; 
+      cv::Mat nextOctaveFirstLevel; 
       detectOctaveKeypoints(firstLevel, pixelDistance, nextOctaveFirstLevel);      
       pixelDistance *= 2.0;
       // firstLevel gets destroyed in the process
