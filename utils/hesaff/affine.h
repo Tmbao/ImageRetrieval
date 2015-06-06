@@ -11,7 +11,7 @@
 #define __AFFINE_H__
 
 #include <vector>
-#include <opencv/cv.h>
+#include <cv.h>
 #include "helpers.h"
 
 struct AffineShapeParams
