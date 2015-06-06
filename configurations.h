@@ -23,7 +23,8 @@ const double EPS = 1e-9;
 const string featureConfig = "-hesaff -sift -noangle";
 const string computeDescriptorPath = "./utils/hesaff/hesaff";
 
-const string codebookFile = "data/oxbuilding_codebook_l2_1000000_24464227_128_50it.hdf5";
+// const string codebookFile = "data/oxbuilding_codebook_l2_1000000_24464227_128_50it.hdf5";
+const string codebookFile = "data/Clustering_l2_1000000_13516675_128_50it.hdf5";
 const string indexFile = "data/flannIndex.hdf5";
 
 const string dataFolder = "data/images";

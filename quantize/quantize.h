@@ -28,8 +28,8 @@ void buildIndex() {
     treeIndex->save(indexFile);
 }
 
-void buildBoW(const mat &imageDesc, vec &_weights, uvec &_termID, const string &weightPath, const string &termIDPath) {
-    if (boost::filesystem::exists(weightPath)) {
+void buildBoW(const mat &imageDesc, vec &_weights, uvec &_termID, const string &weightPath, const string &termIDPath, bool force = false) {
+    if (!force && boost::filesystem::exists(weightPath)) {
         _weights.load(weightPath);
         _termID.load(termIDPath);
         return;

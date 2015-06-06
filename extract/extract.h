@@ -40,8 +40,8 @@ void convertJPGtoPNG(string filename) {
     cv::imwrite(filename.replace(filename.size() - 3, 3, "png"), im);
 }
 
-void extractFeatures(string imagePath, mat &kpMat, mat &siftMat, const string &kpPath, const string &siftPath, const string &tempPath) {
-    if (boost::filesystem::exists(siftPath)) {
+void extractFeatures(string imagePath, mat &kpMat, mat &siftMat, const string &kpPath, const string &siftPath, const string &tempPath, bool force = false) {
+    if (!force && boost::filesystem::exists(siftPath)) {
         kpMat.load(kpPath);
         siftMat.load(siftPath);
         cout << kpMat.n_rows <<" "<<kpMat.n_cols << endl;

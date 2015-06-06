@@ -42,7 +42,7 @@ void extractAll() {
         debugVar(kpPath);
         debugVar(siftPath);
         mat _kp, _sift;
-        extractFeatures(imgPath, _kp, _sift, kpPath, siftPath, tempPath);
+        extractFeatures(imgPath, _kp, _sift, kpPath, siftPath, tempPath, true);
 
         app->kp.push_back(_kp);
         app->sift.push_back(_sift);
@@ -74,7 +74,7 @@ void quantizeAllData() {
         vec _weights;
         uvec _termID;
 
-        buildBoW(app->sift[i], _weights, _termID, weightPath, termIDPath);
+        buildBoW(app->sift[i], _weights, _termID, weightPath, termIDPath, true);
         
 //      Insert to inverted index
         app->ivt.add(_weights, _termID, i);
@@ -119,7 +119,7 @@ void processAllQueries() {
         imgPath = queryFolder + "/" + imgPath;
 
         mat _kp, _sift;
-        extractFeatures(imgPath, _kp, _sift, kpPath, siftPath, tempPath);
+        extractFeatures(imgPath, _kp, _sift, kpPath, siftPath, tempPath, true);
 
         queryKp.push_back(_kp);
         querySift.push_back(_sift);
@@ -144,7 +144,7 @@ void processAllQueries() {
         string termIDPath = termIDFolder + "/" + tmp;
 
         debugInfo("Building query BOW");
-        buildBoW(querySift[i], _weights, _termID, weightPath, termIDPath);
+        buildBoW(querySift[i], _weights, _termID, weightPath, termIDPath, true);
         
         debugInfo("Building query tfidf");
         vector<double> qTfidf = app->ivt.makeQueryTfidf(_weights, _termID);
