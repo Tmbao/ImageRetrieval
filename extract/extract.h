@@ -49,12 +49,16 @@ void extractFeatures(string imagePath, mat &kpMat, mat &siftMat, const string &k
         return;
     }
 
-    hessaffExtract(imagePath, tempPath);
+    string tempFile = "./temp.mat";
+
+    string cmd = computeDescriptorPath + " " + imagePath + " " + tempFile;
+
+    system(cmd.c_str());
 
     mat clip_kp;
     umat clip_desc;
 
-    if (!vl_ubcread(tempPath, clip_kp, clip_desc)) {
+    if (!vl_ubcread(tempFile, clip_kp, clip_desc)) {
         clip_kp = mat(5, 0);
         clip_desc = umat(128, 0);
     }
