@@ -3,6 +3,9 @@ oxbuild_images.tgz
 ImageRetrievalCpp
 utils/compute_ap/compute_ap
 data/*
-CMakeFiles/*
+
 CMakeCache.txt
+CMakeFiles
+Makefile
 cmake_install.cmake
+install_manifest.txt
