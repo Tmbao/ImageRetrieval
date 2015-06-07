@@ -16,6 +16,8 @@ set(SOURCE_FILES
     utils/utils.h
     utils/score.h
     configurations.h
+    initialize.h
+    runserver.h
     main.cpp
     README.md)
 
