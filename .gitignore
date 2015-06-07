@@ -2,7 +2,7 @@ temp.mat
 oxbuild_images.tgz
 ImageRetrievalCpp
 utils/compute_ap/compute_ap
-data/
-CMakeFiles/
+data/*
+CMakeFiles/*
 CMakeCache.txt
 cmake_install.cmake
