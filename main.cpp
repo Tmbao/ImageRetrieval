@@ -42,7 +42,7 @@ void extractAll() {
         debugVar(kpPath);
         debugVar(siftPath);
         mat _kp, _sift;
-        extractFeatures(imgPath, _kp, _sift, kpPath, siftPath, tempPath, true);
+        extractFeatures(imgPath, _kp, _sift, kpPath, siftPath, tempPath);
 
         app->kp.push_back(_kp);
         app->sift.push_back(_sift);
@@ -119,7 +119,7 @@ void processAllQueries() {
         imgPath = queryFolder + "/" + imgPath;
 
         mat _kp, _sift;
-        extractFeatures(imgPath, _kp, _sift, kpPath, siftPath, tempPath, true);
+        extractFeatures(imgPath, _kp, _sift, kpPath, siftPath, tempPath);
 
         queryKp.push_back(_kp);
         querySift.push_back(_sift);

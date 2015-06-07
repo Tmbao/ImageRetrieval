@@ -7,7 +7,7 @@ const string apFolder = "data/ap/";
 
 int main() {
     DIR *dir = opendir(apFolder.c_str());
-    double mAP = 0;
+    long double mAP = 0;
     int cnt = 0;
     while (dirent *pdir = readdir(dir)) {
         string fName = pdir->d_name;
@@ -20,7 +20,7 @@ int main() {
 	cout << fName << " ";
 
         ifstream fin(fName.c_str());
-        double ap;
+        long double ap;
 
         fin >> ap;
         fin.close();
