@@ -13,6 +13,8 @@
 
 void processAllQueries() {
 
+    AppData *app = AppData::getInstance();
+
     vector<string> queryPath;
     vector<mat> queryKp, querySift;
 

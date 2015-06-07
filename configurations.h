@@ -17,25 +17,34 @@ using namespace arma;
 #include <dirent.h>
 
 
-const int number_of_visual_words = 1000000;
-const double EPS = 1e-9;
+static const int number_of_visual_words = 1000000;
+static const double EPS = 1e-9;
 
-const string featureConfig = "-hesaff -sift -noangle";
-const string computeDescriptorPath = "./utils/hesaff/hesaff";
+static const string featureConfig = "-hesaff -sift -noangle";
+static const string computeDescriptorPath = "./utils/hesaff/hesaff";
 
-// const string codebookFile = "data/oxbuilding_codebook_l2_1000000_24464227_128_50it.hdf5";
-const string codebookFile = "data/Clustering_l2_1000000_13516675_128_50it.hdf5";
-const string indexFile = "data/flannIndex.hdf5";
+// static const string codebookFile = "data/oxbuilding_codebook_l2_1000000_24464227_128_50it.hdf5";
+static const string codebookFile = "data/Clustering_l2_1000000_13516675_128_50it.hdf5";
+static const string indexFile = "data/flannIndex.hdf5";
 
-const string dataFolder = "data/images";
-const string queryFolder = "data/queries";
-const string rankedListFolder = "data/rankedlists";
-const string kpFolder = "data/Kp";
-const string siftFolder = "data/SIFT";
-const string weightFolder = "data/weight";
-const string termIDFolder = "data/termID";
-const string apFolder = "data/ap";
-const string tempFolder = "data/temp";
+static const string dataFolder = "data/images";
+static const string queryFolder = "data/queries";
+static const string rankedListFolder = "data/rankedlists";
+static const string kpFolder = "data/Kp";
+static const string siftFolder = "data/SIFT";
+static const string weightFolder = "data/weight";
+static const string termIDFolder = "data/termID";
+static const string apFolder = "data/ap";
+static const string tempFolder = "data/temp";
+
+static const string mediaRoot = "/home/minhbao/.ImageRetrieval/media/";
+
+
+static const char *sqlUrl = "http://127.0.0.1:3306/";
+static const char *sqlUser = "root";
+static const char *sqlPassword = "";
+
+static const int loopSleepTime = 1000;
 
 
 // Geometric verification parameters

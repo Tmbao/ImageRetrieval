@@ -26,4 +26,4 @@ include_directories(${HDF5_INCLUDE_DIRS})
 include_directories(${Boost_INCLUDE_DIRS})
 
 add_executable(ImageRetrievalCpp ${SOURCE_FILES})
-target_link_libraries(ImageRetrievalCpp ${OpenCV_LIBRARIES} ${HDF5_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(ImageRetrievalCpp ${OpenCV_LIBRARIES} ${HDF5_LIBRARIES} ${Boost_LIBRARIES} mysqlcppconn)
