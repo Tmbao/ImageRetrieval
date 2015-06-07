@@ -167,7 +167,18 @@ int main(int argc, char **argv)
          detector.detectPyramidKeypoints(image);
          cout << "Detected " << g_numberOfPoints << " keypoints and " << g_numberOfAffinePoints << " affine shapes in " << getTime()-t1 << " sec." << endl;
 
-         ofstream out(argv[2]);
+         string out_fname;
+         // Default output file
+         if (argc == 2) {
+            char suffix[] = ".hesaff.sift";
+            int len = strlen(argv[1])+strlen(suffix)+1;
+            char buf[len];
+            snprintf(buf, len, "%s%s", argv[1], suffix); buf[len-1]=0;
+            out_fname = buf;
+         } else {
+            out_fname = argv[2];
+         }
+         ofstream out(out_fname.c_str());
          detector.exportKeypoints(out);
       }
    } else {
