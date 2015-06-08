@@ -55,7 +55,7 @@ void quantizeAllData() {
 
     debugInfo("Quantizing images");
 
-    buildIndex();
+    buildIndex(true);
 
     app->weights.reserve(app->path.size());
     app->termID.reserve(app->path.size());

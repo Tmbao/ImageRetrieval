@@ -13,17 +13,17 @@ const int queryKnn = 3;
 cvflann::Matrix<double> dataset;
 cvflann::Index<cvflann::L2<double>> *treeIndex;
 
-void buildIndex() {
+void buildIndex(bool force = false) {
     cvflann::load_from_file(dataset, codebookFile, "clusters");
 
     cvflann::IndexParams *indexParams;
 
-    if (boost::filesystem::exists(indexFile))
+    if (!force && boost::filesystem::exists(indexFile))
         indexParams = new cvflann::SavedIndexParams(indexFile);
     else
         indexParams = new cvflann::KDTreeIndexParams(nKdTree);
 
-    treeIndex = new cvflann::Index<cvflann::L2<double> > (dataset, *indexParams);
+    treeIndex = new cvflann::Index<cvflann::L2<double>> (dataset, *indexParams);
     treeIndex->buildIndex();
     treeIndex->save(indexFile);
 }
