@@ -30,7 +30,15 @@ struct Request {
     Request(int _id = 0, string _fileName = ""): id(_id), fileName(_fileName) {}
 };
 
+
+Driver *driver;
+Connection *con;
+
+
 void processQuery(string fileName) {
+
+    Statement *stmt;
+    stmt = con->createStatement();
 
     AppData *app = AppData::getInstance();
     int nDocs = app->path.size();
@@ -51,22 +59,24 @@ void processQuery(string fileName) {
 
     vector<double> qTfidf = app->ivt.makeQueryTfidf(_weights, _termID);
 
+    // Compute ranked list
     Score score(computeAllScores(qTfidf));
     vector<int> rankedList(nDocs);
     for (int i = 0; i < nDocs; i++)
         rankedList[i] = i;
     sort(rankedList.begin(), rankedList.end(), score);
 
-    string rankedListPath = fileName + ".txt";
-    FILE *rankedListFile = fopen(rankedListPath.c_str(), "w");
-    for (int i = 0; i < nDocs; i++) {
-        fprintf(rankedListFile, "%s\n", getFileBaseName(app->path[rankedList[i]]).c_str());
-    }
+    vector<string> rankedListStr(nDocs);
+    for (int i = 0; i < nDocs; i++)
+        rankedListStr[i] = getFileBaseName(app->path[rankedList[i]]);
+
+    // Save ranked list into db
+    string jsonRankedList = vectorToJson(rankedListStr, "ranked_list");
+    string command = "insert into ImageRetrieval_responserankedlist(data) values('" + jsonRankedList + "')";
+    stmt->executeQuery(command.c_str());
 }
 
 void runServer() {
-    Driver *driver;
-    Connection *con;
     Statement *stmt;
     ResultSet *res;
 
@@ -114,6 +124,5 @@ void runServer() {
         cerr << ", SQLState: " << e.getSQLState() << " )" << endl;
     }
 }
-
 
 #endif
