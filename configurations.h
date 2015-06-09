@@ -16,6 +16,8 @@ using namespace arma;
 
 #include <dirent.h>
 
+#include "local_configuration.h"
+
 
 static const int number_of_visual_words = 1000000;
 static const double EPS = 1e-9;
@@ -36,13 +38,6 @@ static const string weightFolder = "data/weight";
 static const string termIDFolder = "data/termID";
 static const string apFolder = "data/ap";
 static const string tempFolder = "data/temp";
-
-static const string mediaRoot = "/home/minhbao/.ImageRetrieval/media/";
-
-
-static const char *sqlUrl = "http://127.0.0.1:3306/";
-static const char *sqlUser = "root";
-static const char *sqlPassword = "";
 
 static const int loopSleepTime = 1000;
 
