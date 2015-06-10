@@ -4,6 +4,7 @@ ImageRetrievalCpp
 utils/compute_ap/compute_ap
 local_configurations.h
 data/*
+.idea/*
 CMakeCache.txt
 CMakeFiles
 Makefile
