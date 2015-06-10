@@ -25,8 +25,8 @@ void extractAll() {
 
 //    Extract features
     app->path.shrink_to_fit();
-    app->kp.reserve(app->path.size());
-    app->sift.reserve(app->path.size());
+    // app->kp.reserve(app->path.size());
+    // app->sift.reserve(app->path.size());
     for (string imgPath : app->path) {
 
         debugVar(imgPath);
@@ -44,8 +44,8 @@ void extractAll() {
         mat _kp, _sift;
         extractFeatures(imgPath, _kp, _sift, kpPath, siftPath, tempPath);
 
-        app->kp.push_back(_kp);
-        app->sift.push_back(_sift);
+        // app->kp.push_back(_kp);
+        // app->sift.push_back(_sift);
     }
 }
 
@@ -57,8 +57,8 @@ void quantizeAllData() {
 
     buildIndex(true);
 
-    app->weights.reserve(app->path.size());
-    app->termID.reserve(app->path.size());
+    // app->weights.reserve(app->path.size());
+    // app->termID.reserve(app->path.size());
 
     int nDocs = app->path.size();
     for (int i = 0; i < nDocs; i++) {
@@ -81,8 +81,8 @@ void quantizeAllData() {
 //        Insert to inverted index
         app->ivt.add(_weights, _termID, i);
 
-        app->weights.push_back(_weights);
-        app->termID.push_back(_termID);
+        // app->weights.push_back(_weights);
+        // app->termID.push_back(_termID);
     }
 
 //    Build TFIDF
