@@ -3,7 +3,7 @@ oxbuild_images.tgz
 ImageRetrievalCpp
 utils/compute_ap/compute_ap
 local_configurations.h
-
+data/*
 CMakeCache.txt
 CMakeFiles
 Makefile

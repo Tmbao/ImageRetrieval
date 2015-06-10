@@ -1,6 +1,7 @@
 #include "configurations.h"
 #include "initialize.h"
 #include "runserver.h"
+#include "test.h"
 
 #include "app/appdata.h"
 #include "extract/extract.h"

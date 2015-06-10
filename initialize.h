@@ -76,9 +76,9 @@ void quantizeAllData() {
         vec _weights;
         uvec _termID;
 
-        buildBoW(app->sift[i], _weights, _termID, weightPath, termIDPath, true);
+        buildBoW(app->sift[i], _weights, _termID, weightPath, termIDPath, false);
         
-//      Insert to inverted index
+//        Insert to inverted index
         app->ivt.add(_weights, _termID, i);
 
         app->weights.push_back(_weights);

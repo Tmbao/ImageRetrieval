@@ -16,7 +16,7 @@ using namespace arma;
 
 #include <dirent.h>
 
-#include "local_configuration.h"
+#include "local_configurations.h"
 
 
 static const int number_of_visual_words = 1000000;
