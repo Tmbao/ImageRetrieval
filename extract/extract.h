@@ -3,13 +3,13 @@
 
 #include "../configurations.h"
 
-mat inv2x2(mat C) {
+inline mat inv2x2(mat C) {
     mat den = C.row(0) % C.row(2) - C.row(1) % C.row(1);
     mat S = join_vert(join_vert(C.row(2), - C.row(1)), C.row(0)) / repmat(den.row(0), 3, 1);
     return S;
 }
 
-bool vl_ubcread(string file, mat &f, umat &d) {
+inline bool vl_ubcread(string file, mat &f, umat &d) {
     int numKeypoints, descLen;
     FILE *fid = fopen(file.c_str(), "r");
 
@@ -35,12 +35,12 @@ bool vl_ubcread(string file, mat &f, umat &d) {
     return 1;
 }
 
-void convertJPGtoPNG(string filename) {
+inline void convertJPGtoPNG(string filename) {
     cv::Mat im = cv::imread(filename);
     cv::imwrite(filename.replace(filename.size() - 3, 3, "png"), im);
 }
 
-void extractFeatures(string imagePath, mat &kpMat, mat &siftMat, const string &kpPath, const string &siftPath, const string &tempPath, bool force = false) {
+inline void extractFeatures(string imagePath, mat &kpMat, mat &siftMat, const string &kpPath, const string &siftPath, const string &tempPath, bool force = false) {
     if (!force && boost::filesystem::exists(siftPath)) {
         kpMat.load(kpPath);
         siftMat.load(siftPath);

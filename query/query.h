@@ -6,7 +6,7 @@
 #include "../app/appdata.h"
 
 
-vector<double> computeAllScores(vector<double> qTfidf) {
+inline vector<double> computeAllScores(vector<double> qTfidf) {
     AppData *app = AppData::getInstance();
 
     vector<double> scores(app->ivt.nDocs);
@@ -16,7 +16,7 @@ vector<double> computeAllScores(vector<double> qTfidf) {
         for (int j = 0; j < app->ivt.index[i].size(); j++)
             scores[app->ivt.index[i][j]] += qTfidf[i] * app->ivt.tfidf[i][j];
     }
-    
+
     return scores;
 }
 
